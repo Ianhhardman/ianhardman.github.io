@@ -1,0 +1,385 @@
+/* ianhardman.com — Ian H. Hardman
+   Single stylesheet for all pages. No external dependencies. */
+
+:root {
+  --ink: #14181d;
+  --body: #333b45;
+  --muted: #6b7683;
+  --line: #e3e7ec;
+  --bg: #ffffff;
+  --bg-soft: #f7f9fb;
+  --accent: #16537e;
+  --accent-hover: #0f3d5e;
+  --maxw: 900px;
+  --radius: 10px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --ink: #f0f3f6;
+    --body: #c6ced7;
+    --muted: #909aa6;
+    --line: #2a3138;
+    --bg: #14181d;
+    --bg-soft: #1b2128;
+    --accent: #79b8e3;
+    --accent-hover: #a5d0ef;
+  }
+}
+
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--body);
+  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    "Helvetica Neue", Arial, sans-serif;
+  font-size: 17px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* ---------- Layout ---------- */
+
+.wrap {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+main {
+  padding: 56px 0 24px;
+}
+
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  background: var(--accent);
+  color: #fff;
+  padding: 10px 16px;
+  border-radius: 0 0 var(--radius) 0;
+  z-index: 100;
+}
+
+.skip-link:focus { left: 0; }
+
+/* ---------- Header ---------- */
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: color-mix(in srgb, var(--bg) 88%, transparent);
+  backdrop-filter: saturate(180%) blur(12px);
+  -webkit-backdrop-filter: saturate(180%) blur(12px);
+  border-bottom: 1px solid var(--line);
+}
+
+.site-header .wrap {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  min-height: 68px;
+  flex-wrap: wrap;
+}
+
+.brand {
+  font-size: 1.0625rem;
+  font-weight: 640;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.brand,
+.site-nav a { border-bottom: 0; }
+
+.brand:hover { color: var(--accent); }
+
+.site-nav {
+  display: flex;
+  gap: 4px;
+  margin-left: auto;
+}
+
+.site-nav a {
+  color: var(--muted);
+  text-decoration: none;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  padding: 7px 12px;
+  border-radius: 7px;
+  transition: color 0.15s ease, background-color 0.15s ease;
+}
+
+.site-nav a:hover {
+  color: var(--ink);
+  background: var(--bg-soft);
+}
+
+.site-nav a[aria-current="page"] {
+  color: var(--ink);
+  background: var(--bg-soft);
+  font-weight: 600;
+}
+
+/* ---------- Typography ---------- */
+
+h1 {
+  font-size: 2rem;
+  line-height: 1.2;
+  letter-spacing: -0.022em;
+  color: var(--ink);
+  margin: 0 0 6px;
+  font-weight: 660;
+}
+
+h2 {
+  font-size: 1.1875rem;
+  letter-spacing: -0.012em;
+  color: var(--ink);
+  font-weight: 640;
+  margin: 0 0 18px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--line);
+}
+
+h3 {
+  font-size: 1rem;
+  color: var(--ink);
+  font-weight: 620;
+  margin: 0 0 14px;
+  letter-spacing: -0.005em;
+}
+
+p { margin: 0 0 16px; }
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+  border-bottom: 1px solid color-mix(in srgb, var(--accent) 32%, transparent);
+  transition: color 0.15s ease, border-color 0.15s ease;
+}
+
+a:hover {
+  color: var(--accent-hover);
+  border-bottom-color: currentColor;
+}
+
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 3px;
+}
+
+.lede {
+  font-size: 1.0625rem;
+  color: var(--body);
+}
+
+.eyebrow {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin: 0 0 10px;
+}
+
+/* ---------- Intro (home) ---------- */
+
+.intro {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  gap: 40px;
+  align-items: start;
+  margin-bottom: 56px;
+}
+
+.portrait {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  border-radius: var(--radius);
+  background: var(--bg-soft);
+  display: block;
+}
+
+.fields {
+  margin: 18px 0 0;
+  font-size: 0.9375rem;
+  color: var(--muted);
+}
+
+.fields strong {
+  color: var(--ink);
+  font-weight: 600;
+}
+
+/* ---------- Sections ---------- */
+
+section { margin-bottom: 48px; }
+
+.entry-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.entry-list > li { margin-bottom: 26px; }
+
+.entry-list > li:last-child { margin-bottom: 0; }
+
+.entry-title {
+  color: var(--ink);
+  font-weight: 600;
+  display: block;
+  margin-bottom: 3px;
+  line-height: 1.45;
+}
+
+.entry-meta {
+  font-size: 0.9375rem;
+  color: var(--muted);
+  margin: 0;
+}
+
+.entry-meta + .entry-meta { margin-top: 2px; }
+
+.tag {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 9%, transparent);
+  border-radius: 999px;
+  padding: 3px 10px;
+  margin-top: 8px;
+}
+
+.media-line {
+  font-size: 0.875rem;
+  color: var(--muted);
+  margin-top: 6px;
+}
+
+.media-line a { font-size: 0.875rem; }
+
+/* Two-column definition-style blocks (education, contact, teaching) */
+
+.stack {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.stack > li { margin-bottom: 14px; }
+
+.stack > li:last-child { margin-bottom: 0; }
+
+.address {
+  font-style: normal;
+  margin: 0 0 14px;
+  color: var(--body);
+}
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 28px;
+}
+
+.course {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  align-items: baseline;
+}
+
+.course-code {
+  color: var(--ink);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.course-term {
+  font-size: 0.9375rem;
+  color: var(--muted);
+}
+
+.institution {
+  margin-top: 36px;
+}
+
+.institution:first-of-type { margin-top: 0; }
+
+/* ---------- Footer ---------- */
+
+.site-footer {
+  border-top: 1px solid var(--line);
+  margin-top: 24px;
+  padding: 26px 0 40px;
+  font-size: 0.875rem;
+  color: var(--muted);
+}
+
+.site-footer .wrap {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.site-footer a { color: var(--muted); }
+
+.site-footer a:hover { color: var(--accent); }
+
+/* ---------- Responsive ---------- */
+
+@media (max-width: 760px) {
+  body { font-size: 16px; }
+
+  main { padding-top: 36px; }
+
+  h1 { font-size: 1.625rem; }
+
+  .intro {
+    grid-template-columns: 1fr;
+    gap: 26px;
+    margin-bottom: 40px;
+  }
+
+  .portrait {
+    max-width: 220px;
+    aspect-ratio: 1 / 1;
+  }
+
+  .site-header .wrap {
+    min-height: 0;
+    padding-top: 12px;
+    padding-bottom: 12px;
+  }
+
+  .site-nav { margin-left: -12px; }
+}
+
+@media print {
+  .site-header, .site-footer, .skip-link { display: none; }
+  body { font-size: 11pt; color: #000; }
+  a { color: #000; border: 0; }
+}
